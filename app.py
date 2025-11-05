@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-import pickle
+import joblib
 
 # Load model and column info
-with open("model.pkl", "rb") as f:
-    data = pickle.load(f)
+data = joblib.load("model.pkl")
+
 model = data["model"]
 model_columns = data["columns"]
 
@@ -61,3 +61,4 @@ input_encoded = input_encoded.reindex(columns=model_columns, fill_value=0)
 if st.button("Predict Fare"):
     prediction = model.predict(input_encoded)[0]
     st.success(f"Estimated Flight Fare: ₹{prediction:,.2f}")
+
