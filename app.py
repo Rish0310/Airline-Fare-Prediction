@@ -4,7 +4,9 @@ import numpy as np
 import joblib
 
 # Load trained model
-model = joblib.load("model.pkl")
+data = joblib.load("model.pkl")
+model = data["model"]
+model_columns = data["columns"]
 
 st.title("✈️ Airline Fare Prediction App")
 
@@ -62,5 +64,3 @@ input_encoded = input_encoded.reindex(columns=model_columns, fill_value=0)
 if st.button("Predict Fare"):
     prediction = model.predict(input_encoded)[0]
     st.success(f"Estimated Flight Fare: ₹{prediction:,.2f}")
-
-
