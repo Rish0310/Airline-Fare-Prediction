@@ -1,14 +1,15 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import joblib
 
-# Load model and column info
-data = joblib.load("model.pkl")
-
-model = data["model"]
-model_columns = data["columns"]
+# Load trained model
+model = joblib.load("model.pkl")
 
 st.title("✈️ Airline Fare Prediction App")
+
+# (Then your input form and prediction logic follow...)
+
 st.write("Predict flight ticket prices based on airline and journey details.")
 
 # --- Input Fields ---
@@ -61,4 +62,5 @@ input_encoded = input_encoded.reindex(columns=model_columns, fill_value=0)
 if st.button("Predict Fare"):
     prediction = model.predict(input_encoded)[0]
     st.success(f"Estimated Flight Fare: ₹{prediction:,.2f}")
+
 
